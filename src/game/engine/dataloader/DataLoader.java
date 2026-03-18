@@ -8,6 +8,7 @@ import game.engine.cards.*;
 import game.engine.cells.*;
 import game.engine.monsters.*;
 public class DataLoader {
+	
 	public static final String CARDS_FILE_NAME = "cards.csv";
 	public static final String CELLS_FILE_NAME = "cells.csv";
 	public static final String MONSTERS_FILE_NAME = "monsters.csv";
@@ -19,7 +20,7 @@ public class DataLoader {
         String line;
 
         while ((line = br.readLine()) != null) {
-            String[] data = line.split(","); //[cite: 360]
+            String[] data = line.split(","); 
             String type = data[0];
             String name = data[1];
             String desc = data[2];
@@ -27,35 +28,35 @@ public class DataLoader {
 
             switch (type) {
                 case "SwapperCard":
-                    cardsList.add(new SwapperCard(name, desc, rarity)); //[cite: 361]
+                    cardsList.add(new SwapperCard(name, desc, rarity)); 
                     break;
                 case "ShieldCard":
-                    cardsList.add(new ShieldCard(name, desc, rarity)); //[cite: 361]
+                    cardsList.add(new ShieldCard(name, desc, rarity));
                     break;
                 case "EnergyStealCard":
                     int energy = Integer.parseInt(data[4]);
-                    cardsList.add(new EnergyStealCard(name, desc, rarity, energy)); //[cite: 361]
+                    cardsList.add(new EnergyStealCard(name, desc, rarity, energy)); 
                     break;
                 case "StartOverCard":
                     boolean lucky = Boolean.parseBoolean(data[4]);
-                    cardsList.add(new StartOverCard(name, desc, rarity, lucky)); //[cite: 361]
+                    cardsList.add(new StartOverCard(name, desc, rarity, lucky)); 
                     break;
                 case "ConfusionCard":
                     int duration = Integer.parseInt(data[4]);
-                    cardsList.add(new ConfusionCard(name, desc, rarity, duration)); //[cite: 361]
+                    cardsList.add(new ConfusionCard(name, desc, rarity, duration)); 
                     break;
             }
         }
         br.close();
         return cardsList;
 	}
-	public static ArrayList<Cell> readCells() throws IOException { //[cite: 355]
+	public static ArrayList<Cell> readCells() throws IOException { 
 	        ArrayList<Cell> cellsList = new ArrayList<>();
 	        BufferedReader br = new BufferedReader(new FileReader(CELLS_FILE_NAME));
 	        String line;
 
 	        while ((line = br.readLine()) != null) {
-	            String[] data = line.split(","); //[cite: 360]
+	            String[] data = line.split(","); 
 	            String name = data[0];
 
 	            if (data.length == 3) { // DoorCell (name, role, energy) 
@@ -65,22 +66,22 @@ public class DataLoader {
 	            } else if (data.length == 2) { // TransportCells 
 	                int effect = Integer.parseInt(data[1]);
 	                if (effect > 0) {
-	                    cellsList.add(new ConveyorBelt(name, effect)); //[cite: 364]
+	                    cellsList.add(new ConveyorBelt(name, effect)); 
 	                } else {
-	                    cellsList.add(new ContaminationSock(name, effect)); //[cite: 364]
+	                    cellsList.add(new ContaminationSock(name, effect)); 
 	                }
 	            }
 	        }
 	        br.close();
 	        return cellsList;
 	    }
-	public static ArrayList<Monster> readMonsters() throws IOException{ //[cite: 356]
+	public static ArrayList<Monster> readMonsters() throws IOException{
 	        ArrayList<Monster> monstersList = new ArrayList<>();
 	        BufferedReader br = new BufferedReader(new FileReader(MONSTERS_FILE_NAME));
 	        String line;
 
 	        while ((line = br.readLine()) != null) {
-	            String[] data = line.split(","); //[cite: 360, 366]
+	            String[] data = line.split(","); 
 	            String type = data[0];
 	            String name = data[1];
 	            String desc = data[2];
@@ -89,16 +90,16 @@ public class DataLoader {
 
 	            switch (type) {
 	                case "Dasher":
-	                    monstersList.add(new Dasher(name, desc, role, energy)); //[cite: 162]
+	                    monstersList.add(new Dasher(name, desc, role, energy)); 
 	                    break;
 	                case "Dynamo":
-	                    monstersList.add(new Dynamo(name, desc, role, energy)); //[cite: 170]
+	                    monstersList.add(new Dynamo(name, desc, role, energy));
 	                    break;
 	                case "MultiTasker":
-	                    monstersList.add(new MultiTasker(name, desc, role, energy)); //[cite: 182]
+	                    monstersList.add(new MultiTasker(name, desc, role, energy)); 
 	                    break;
 	                case "Schemer":
-	                    monstersList.add(new Schemer(name, desc, role, energy)); //[cite: 190]
+	                    monstersList.add(new Schemer(name, desc, role, energy)); 
 	                    break;
 	            }
 	        }
