@@ -92,10 +92,10 @@ The project was designed using **object-oriented software engineering principles
 
 # 👥 Team
 
-- Omar Shaker  
-- Mark Fahim  
-- Ahmed Roshdy  
-- Karl Hany  
+- Omar Shaker  🔗 **GitHub:** [Omar-Shaker-Elbana](https://github.com/Omar-Shaker-Elbana)  
+- Mark Fahim  🔗 **GitHub:** [mark1234720](https://github.com/mark1234720) 
+- Ahmed Roshdy  🔗 **GitHub:** [AhmedMohammedRo](https://github.com/AhmedMohammedRo) 
+- Karl Hany  🔗 **GitHub:** [karlhany222-spec](https://github.com/karlhany222-spec) 
 
 ---
 

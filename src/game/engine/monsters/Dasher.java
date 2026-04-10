@@ -4,6 +4,7 @@ import game.engine.Role;
 public class Dasher extends Monster{
 	
 	private int momentumTurns;
+	
 	public Dasher(String name, String description, Role role, int energy)
 	{
 		super(name,description,role,energy);
@@ -14,8 +15,8 @@ public class Dasher extends Monster{
 	{
 		return this.momentumTurns;
 	}
-	public void setMomentumTurns(int n)
+	public void setMomentumTurns(int momentumTurns)
 	{
-		this.momentumTurns = n;
+		this.momentumTurns = momentumTurns;
 	}
 }

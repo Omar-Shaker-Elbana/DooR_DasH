@@ -1,11 +1,11 @@
 package game.engine.cells;
-import game.engine.interfaces.CanisterModifier;
-import game.engine.monsters.Monster;
 import game.engine.Role;
-public class DoorCell extends Cell implements CanisterModifier {
+import game.engine.interfaces.CanisterModifier;
+import game.engine.monsters.*;
+public class DoorCell extends Cell implements CanisterModifier{
 		
-	    private Role role;
-		private int energy;
+	    private final Role role;
+		private final int energy;
 		private boolean activated;
 		
 		public DoorCell(String name, Role role, int energy)
@@ -35,9 +35,12 @@ public class DoorCell extends Cell implements CanisterModifier {
 		{
 			this.activated=active;
 		}
-
+		
 		@Override
 		public void modifyCanister(Monster monster) {
-			
+
 		}
+		
+
+		
 }

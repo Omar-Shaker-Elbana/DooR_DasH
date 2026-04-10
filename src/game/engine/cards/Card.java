@@ -1,10 +1,10 @@
 package game.engine.cards;
 
 public abstract class Card {
-	 private String name;
-	 private String description;
-	 private int rarity;
-	 private boolean lucky;
+	 private final String name;
+	 private final String description;
+	 private final int rarity;
+	 private final boolean lucky;
 	 
 	 
 	 public Card(String name, String description, int rarity, boolean lucky){

@@ -1,6 +1,7 @@
 package game.engine.monsters;
 
 import game.engine.Role;
+
 public class Dynamo extends Monster{
 	
 	

@@ -4,9 +4,9 @@ import game.engine.Role;
 public abstract class Monster implements Comparable<Monster> {
 	
 		//Read-Only Attributes
-		private String name;
-		private String description;
-		private Role originalRole;
+		private final String name;
+		private final String description;
+		private final Role originalRole;
 		
 		//Read and Write Attributes
 		private Role role;
@@ -31,7 +31,7 @@ public abstract class Monster implements Comparable<Monster> {
 	@Override
 	public int compareTo(Monster o)
 	{
-		return this.position-o.position;
+		return this.position - o.position;
 	}
 	
 	
