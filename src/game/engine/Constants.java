@@ -25,9 +25,9 @@ public final class Constants {
 	 public final static int SCHEMER_STEAL = 10;
 	 
 	/* Cell Constants */
-	 public final int SLIP_PENALTY = 100;
+	 public static final int SLIP_PENALTY = 100;
 	 
 	/* Power Constants */
-	public final int POWERUP_COST = 500;
+	public static final int POWERUP_COST = 500;
 	
 }
