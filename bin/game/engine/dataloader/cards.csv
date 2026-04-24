@@ -1,0 +1,9 @@
+SWAPPER,Position Swap,if behind switch,4
+STARTOVER,Contamination Code,You go back,2,false
+STARTOVER,2319 Alert,Opponent goes back,3,true
+ENERGYSTEAL,Small Snatcher,Steal 50 canister energy points,3,50
+ENERGYSTEAL,Sneaky Thief,Steal 100 canister energy points,2,100
+ENERGYSTEAL,Mega Drain,Steal 150 canister energy points,1,150
+SHIELD,Super Shield,Block next damage,5
+CONFUSION,Mind Scramble,Confused for 2 turns,3,2
+CONFUSION,Total Confusion,Confused for 3 turns,2,3
