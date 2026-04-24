@@ -1,107 +1,132 @@
 package game.engine.dataloader;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import game.engine.exceptions.InvalidCSVFormat;
 import game.engine.Role;
 import game.engine.cards.*;
 import game.engine.cells.*;
 import game.engine.monsters.*;
+
 public class DataLoader {
-	
 	private static final String CARDS_FILE_NAME = "cards.csv";
 	private static final String CELLS_FILE_NAME = "cells.csv";
 	private static final String MONSTERS_FILE_NAME = "monsters.csv";
 	
-	
-	public static ArrayList<Card> readCards() throws IOException{
-		ArrayList<Card> cardsList = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(CARDS_FILE_NAME));
-        String line;
+	@SuppressWarnings("resource")
+	public static ArrayList<Card> readCards() throws IOException {
+		ArrayList<Card> cards = new ArrayList<Card>();
 
-        while ((line = br.readLine()) != null) {
-            String[] data = line.split(","); 
-            String type = data[0];
-            String name = data[1];
-            String desc = data[2];
-            int rarity = Integer.parseInt(data[3]);
+		BufferedReader br = new BufferedReader(new FileReader(CARDS_FILE_NAME));
 
-            switch (type) {
-                case "SWAPPER":
-                    cardsList.add(new SwapperCard(name, desc, rarity)); 
-                    break;
-                case "SHIELD":
-                    cardsList.add(new ShieldCard(name, desc, rarity));
-                    break;
-                case "ENERGYSTEAL":
-                    int energy = Integer.parseInt(data[4]);
-                    cardsList.add(new EnergyStealCard(name, desc, rarity, energy)); 
-                    break;
-                case "STARTOVER":
-                    boolean lucky = Boolean.parseBoolean(data[4]);
-                    cardsList.add(new StartOverCard(name, desc, rarity, lucky)); 
-                    break;
-                case "CONFUSION":
-                    int duration = Integer.parseInt(data[4]);
-                    cardsList.add(new ConfusionCard(name, desc, rarity, duration)); 
-                    break;
-            }
-        }
-        br.close();
-        return cardsList;
+		while (br.ready()) {
+			String nextLine = br.readLine();
+			String[] data = nextLine.split(",");
+			
+
+			if (data.length != 4 && data.length != 5) {
+				System.out.println(data.length);
+				throw new InvalidCSVFormat(nextLine);
+			}
+				
+			
+			String cardType = data[0];
+			Card card;
+			
+			switch (cardType) {
+				case "SWAPPER":
+					card = new SwapperCard(data[1], data[2], Integer.parseInt(data[3])); break;
+				case "ENERGYSTEAL":
+					card = new EnergyStealCard(data[1], data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4])); break;
+				case "STARTOVER":
+					card = new StartOverCard(data[1], data[2], Integer.parseInt(data[3]), Boolean.parseBoolean(data[4])); break;
+				case "SHIELD":
+					card = new ShieldCard(data[1], data[2], Integer.parseInt(data[3])); break;
+				case "CONFUSION":
+					card = new ConfusionCard(data[1], data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4])); break;
+			default:
+				throw new InvalidCSVFormat("Unknown card type: " + cardType);
+			}
+			
+			cards.add(card);
+			
+		}
+
+		br.close();
+
+		return cards;
 	}
-	public static ArrayList<Cell> readCells() throws IOException { 
-	        ArrayList<Cell> cellsList = new ArrayList<>();
-	        BufferedReader br = new BufferedReader(new FileReader(CELLS_FILE_NAME));
-	        String line;
+	
+	@SuppressWarnings("resource")
+	public static ArrayList<Cell> readCells() throws IOException {
+		ArrayList<Cell> cells = new ArrayList<Cell>();
 
-	        while ((line = br.readLine()) != null) {
-	            String[] data = line.split(","); 
-	            String name = data[0];
+		BufferedReader br = new BufferedReader(new FileReader(CELLS_FILE_NAME));
 
-	            if (data.length == 3) { // DoorCell (name, role, energy) 
-	                Role role = Role.valueOf(data[1]);
-	                int energy = Integer.parseInt(data[2]);
-	                cellsList.add(new DoorCell(name, role, energy));
-	            } else if (data.length == 2) { // TransportCells 
-	                int effect = Integer.parseInt(data[1]);
-	                if (effect > 0) {
-	                    cellsList.add(new ConveyorBelt(name, effect)); 
-	                } else {
-	                    cellsList.add(new ContaminationSock(name, effect)); 
-	                }
-	            }
-	        }
-	        br.close();
-	        return cellsList;
-	    }
-	public static ArrayList<Monster> readMonsters() throws IOException{
-	        ArrayList<Monster> monstersList = new ArrayList<>();
-	        BufferedReader br = new BufferedReader(new FileReader(MONSTERS_FILE_NAME));
-	        String line;
+		while (br.ready()) {
+			String nextLine = br.readLine();
+			String[] data = nextLine.split(",");
+			
 
-	        while ((line = br.readLine()) != null) {
-	            String[] data = line.split(","); 
-	            String type = data[0];
-	            String name = data[1];
-	            String desc = data[2];
-	            Role role = Role.valueOf(data[3]);
-	            int energy = Integer.parseInt(data[4]);
+			if (data.length != 2 && data.length != 3)
+				throw new InvalidCSVFormat(nextLine);
+			
+			Cell cell;
+			
+			if (data.length == 2) 
+				cell = Integer.parseInt(data[1]) > 0 ? new ConveyorBelt(data[0], Integer.parseInt(data[1])) : new ContaminationSock(data[0], Integer.parseInt(data[1]));
+				
+			else 
+				cell = new DoorCell(data[0], Role.valueOf(data[1]), Integer.parseInt(data[2]));
+			
+			cells.add(cell);
+		}
 
-	            switch (type) {
-	                case "DASHER":
-	                    monstersList.add(new Dasher(name, desc, role, energy)); 
-	                    break;
-	                case "DYNAMO":
-	                    monstersList.add(new Dynamo(name, desc, role, energy));
-	                    break;
-	                case "MULTITASKER":
-	                    monstersList.add(new MultiTasker(name, desc, role, energy)); 
-	                    break;
-	                case "SCHEMER":
-	                    monstersList.add(new Schemer(name, desc, role, energy)); 
-	                    break;
-	            }
-	        }
-	        br.close();
-	        return monstersList;
-	    }
+		br.close();
+
+		return cells;
+	}
+	
+	@SuppressWarnings("resource")
+	public static ArrayList<Monster> readMonsters() throws IOException {
+		ArrayList<Monster> monsters = new ArrayList<Monster>();
+
+		BufferedReader br = new BufferedReader(new FileReader(MONSTERS_FILE_NAME));
+
+		while (br.ready()) {
+			String nextLine = br.readLine();
+			String[] data = nextLine.split(",");
+			
+
+			if (data.length != 5)
+				throw new InvalidCSVFormat(nextLine);
+			
+			String monsterType = data[0];
+			Monster monster;
+			
+			switch (monsterType) {
+				case "DYNAMO":
+					monster = new Dynamo(data[1], data[2], Role.valueOf(data[3]), Integer.parseInt(data[4])); break;
+				case "DASHER":
+					monster = new Dasher(data[1], data[2], Role.valueOf(data[3]), Integer.parseInt(data[4])); break;
+				case "MULTITASKER":
+					monster = new MultiTasker(data[1], data[2], Role.valueOf(data[3]), Integer.parseInt(data[4])); break;
+				case "SCHEMER":
+					monster = new Schemer(data[1], data[2], Role.valueOf(data[3]), Integer.parseInt(data[4])); break;
+			default:
+				throw new InvalidCSVFormat("Unknown monster type: " + monsterType);
+			}
+			
+			monsters.add(monster);
+			
+		}
+
+		br.close();
+
+		return monsters;
+	}
+	
 }

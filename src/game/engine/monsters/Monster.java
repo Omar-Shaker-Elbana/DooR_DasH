@@ -1,161 +1,95 @@
 package game.engine.monsters;
 
+import game.engine.Constants;
 import game.engine.Role;
+
 public abstract class Monster implements Comparable<Monster> {
+	private String name;
+	private String description;
+	private Role role;
+	private Role originalRole; // For confusion card
+	private int energy;
+	private int position;
+	private boolean frozen;
+	private boolean shielded;
+	private int confusionTurns;
 	
-		//Read-Only Attributes
-		private final String name;
-		private final String description;
-		private final Role originalRole;
-		
-		//Read and Write Attributes
-		private Role role;
-		private int energy;
-		private int position;
-		private boolean frozen;
-		private boolean shielded;
-		private int confusionTurns;
-		
-		public Monster(String name, String description, Role originalRole, int energy){
-			this.name = name;
-			this.description = description;
-			this.originalRole = originalRole;
-			this.role = originalRole;
-			this.energy = energy;
-			this.position=0;
-			this.confusionTurns=0;
-			this.frozen = false;
-			this.shielded = false;
-		}
-		
+	public Monster(String name, String description, Role originalRole, int energy) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.role = originalRole;
+		this.originalRole = originalRole; 
+		this.energy = energy;
+		this.position = 0;
+		this.frozen = false;
+		this.shielded = false;
+		this.confusionTurns = 0;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	
+	public Role getRole() {
+		return role;
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Role getOriginalRole() {
+		return originalRole;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = Math.max(Constants.MIN_ENERGY, energy);
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position % Constants.BOARD_SIZE;
+	}
+	
+	public boolean isFrozen() {
+		return frozen;
+	}
+	
+	public void setFrozen(boolean frozen) {
+		this.frozen = frozen;
+	}
+	
+	public boolean isShielded() {
+		return shielded;
+	}
+	
+	public void setShielded(boolean shielded) {
+		this.shielded = shielded;
+	}
+	
+	public int getConfusionTurns() {
+		return confusionTurns;
+	}
+	
+	public void setConfusionTurns(int confusionTurns) {
+		this.confusionTurns = confusionTurns;
+	}
+
 	@Override
-	public int compareTo(Monster o)
-	{
-		return this.position - o.position;
+	public int compareTo(Monster other) {
+		return this.position - other.position;
 	}
-	
-	
-	//-----------GETTERS-----------
-	public String getName()
-	{
-		return this.name;
-	}
-	public String getDescription()
-	{
-		return this.description;
-	}
-	public Role getOriginalRole(){
-		return this.originalRole;
-	}
-	public Role getRole()
-	{
-		return this.role;
-	}
-	public int getEnergy()
-	{
-		return this.energy;
-	}
-	public int getPosition()
-	{
-		return this.position;
-	}
-	public int getConfusionTurns()
-	{
-		return this.confusionTurns;
-	}
-	public boolean isFrozen()
-	{
-		return this.frozen;
-	}
-	public boolean isShielded()
-	{
-		return this.shielded;
-	}
-	
-	
-	//----------SETTERS------------
-	public void setRole(Role r)
-	{
-		this.role=r;
-	}
-	public void setEnergy(int e)
-	{
-		if(e>=0)
-		{
-			this.energy=e;
-		}
-		else
-		{
-			this.energy=0;
-		}
-	}
-	public void setPosition(int p)
-	{
-		if(p<0)
-		{
-			this.position=0;
-		}
-		else if(p>99)
-		{
-			this.position=99;
-		}
-		else
-		{
-			this.position = p;
-		}
-	}
-	public void setFrozen(boolean f)
-	{
-		this.frozen=f;
-	}
-	public void setShielded(boolean s)
-	{
-		this.shielded=s;
-	}
-	public void setConfusionTurns(int n)
-	{
-		this.confusionTurns=n;
-	}
-	
-	abstract void executePowerupEffect(Monster opponentMonster);
-	public boolean isConfused()
-	{
-		if(this.getConfusionTurns() == 0)
-		{
-			return false;
-		}
-		return true;
-	}
-	public void move(int distance)
-	{
-		
-			setPosition(this.position+distance);
-		
-	}
-	public final void alterEnergy(int energy){
-			if(isShielded() == true && energy < 0)
-			{
-				this.setShielded(false);
-				return;
-			}
-			int totalEnergy = this.getEnergy()+energy;
-			if(totalEnergy < 0)
-			{
-				totalEnergy=0;
-			}
-			this.setEnergy(totalEnergy);
-	}
-	public void decrementConfusion()
-	{	
-		
-		if(this.confusionTurns>0)
-		{
-			this.confusionTurns--;
-			if(this.confusionTurns == 0){
-				this.role=this.originalRole;
-			}
-		}
-			
-	}
-	
+
 }
