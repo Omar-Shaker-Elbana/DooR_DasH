@@ -14,12 +14,11 @@ public class MonsterCell extends Cell {
 		return cellMonster;
 	}
 
-<<<<<<< HEAD
     public void onLand(Monster landingMonster, Monster opponentMonster) {
         super.onLand(landingMonster, opponentMonster);
         
         if (this.cellMonster.getRole() == landingMonster.getRole()) {
-            landingMonster.executePowerupEffect(opponentMonster);
+        	landingMonster.executePowerupEffect(opponentMonster);
         } else {
             if (landingMonster.getEnergy() > this.cellMonster.getEnergy()) {
                 int landingEnergy = landingMonster.getEnergy();
@@ -35,6 +34,4 @@ public class MonsterCell extends Cell {
         }
     }
 
-=======
->>>>>>> b39bd8a76dee9214f0ad5ed04b197624196b3cfc
 }

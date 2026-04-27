@@ -14,7 +14,7 @@ public class Schemer extends Monster {
 		target.alterEnergy(-diff);
 		return diff;
 	}
-	void executePowerupEffect(Monster opponentMonster) {
+	public void executePowerupEffect(Monster opponentMonster) {
 		int totalEnergy = 0;
 		ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
 		for(Monster stationed : stationedMonsters)

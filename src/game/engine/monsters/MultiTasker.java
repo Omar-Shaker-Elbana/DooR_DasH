@@ -17,7 +17,7 @@ public class MultiTasker extends Monster {
 	public void setNormalSpeedTurns(int normalSpeedTurns) {
 		this.normalSpeedTurns = normalSpeedTurns;
 	}
-	void executePowerupEffect(Monster opponentMonster) {
+	public void executePowerupEffect(Monster opponentMonster) {
 		this.normalSpeedTurns = 2;
 		
 	}

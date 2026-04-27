@@ -23,7 +23,6 @@ public class Cell {
 		this.monster = monster;
 	}
 
-<<<<<<< HEAD
 	public boolean isOccupied() {
         return this.monster != null;
     }
@@ -32,6 +31,4 @@ public class Cell {
         this.monster = landingMonster;
     }
 
-=======
->>>>>>> b39bd8a76dee9214f0ad5ed04b197624196b3cfc
 }

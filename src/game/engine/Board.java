@@ -1,5 +1,4 @@
 package game.engine;
-
 import game.engine.cells.*;
 import game.engine.monsters.Monster;
 import game.engine.cards.Card;
@@ -11,7 +10,7 @@ public class Board {
     private Cell[][] boardCells;
     private static ArrayList<Monster> stationedMonsters = new ArrayList<>();
     private static ArrayList<Card> originalCards = new ArrayList<>();
-    private static ArrayList<Card> cards = new ArrayList<>();
+    public static ArrayList<Card> cards = new ArrayList<>();
 
     public Board(ArrayList<Card> readCards) {
         this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
@@ -19,10 +18,9 @@ public class Board {
         stationedMonsters = new ArrayList<>();
         cards = new ArrayList<>(); 
         
-        originalCards = readCards; 
+        originalCards = readCards; // stays as the raw loaded cards, never modified
         
-        setCardsByRarity(); 
-        reloadCards(); 
+        reloadCards(); // expands by rarity and shuffles into working deck
     }
 
     private int[] indexToRowCol(int index) {
@@ -116,22 +114,18 @@ public class Board {
         return false;
     }
 
-    private void setCardsByRarity() {
-        ArrayList<Card> expanded = new ArrayList<>();
-        for (Card c : originalCards) {
-            for (int i = 0; i < c.getRarity(); i++) {
-                expanded.add(c);
-            }
-        }
-        originalCards = expanded;
-    }
-
     public static void reloadCards() {
         if (cards == null) cards = new ArrayList<>();
         if (originalCards == null) originalCards = new ArrayList<>();
         
         cards.clear();
-        cards.addAll(originalCards);
+        
+        // Re-expand by rarity into the working deck
+        for (Card c : originalCards) {
+            for (int i = 0; i < c.getRarity(); i++) {
+                cards.add(c);
+            }
+        }
         
         if (!cards.isEmpty()) {
             Collections.shuffle(cards);
@@ -165,7 +159,7 @@ public class Board {
         
         if (finalPosition == opponentMonster.getPosition() && finalPosition != 0) {
             currentMonster.setPosition(oldPosition); 
-            throw new InvalidMoveException(InvalidMoveException.MSG);
+            throw new InvalidMoveException(InvalidMoveException.getMsg());
         }
         
         if (currentMonster.isConfused()) currentMonster.decrementConfusion();
@@ -183,48 +177,27 @@ public class Board {
         getCell(opponent.getPosition()).setMonster(opponent);
     }
     	
-=======
+    public Cell[][] getBoardCells() {
+        return boardCells;
+    }
+    
+    public static ArrayList<Monster> getStationedMonsters() {
+        return stationedMonsters;
+    }
+    
+    public static void setStationedMonsters(ArrayList<Monster> stationedMonsters) {
+        Board.stationedMonsters = stationedMonsters;
+    }
 
-import java.util.ArrayList;
-
-import game.engine.cards.Card;
-import game.engine.cells.*;
-import game.engine.monsters.Monster;
-
-public class Board {
-	private Cell[][] boardCells;
-	private static ArrayList<Monster> stationedMonsters; 
-	private static ArrayList<Card> originalCards;
-	public static ArrayList<Card> cards;
-	
-	public Board(ArrayList<Card> readCards) {
-		this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
-		stationedMonsters = new ArrayList<Monster>();
-		originalCards = readCards;
-		cards = new ArrayList<Card>();
-	}
-	
-	public Cell[][] getBoardCells() {
-		return boardCells;
-	}
-	
-	public static ArrayList<Monster> getStationedMonsters() {
-		return stationedMonsters;
-	}
-	
-	public static void setStationedMonsters(ArrayList<Monster> stationedMonsters) {
-		Board.stationedMonsters = stationedMonsters;
-	}
-
-	public static ArrayList<Card> getOriginalCards() {
-		return originalCards;
-	}
-	
-	public static ArrayList<Card> getCards() {
-		return cards;
-	}
-	
-	public static void setCards(ArrayList<Card> cards) {
-		Board.cards = cards;
-	}
+    public static ArrayList<Card> getOriginalCards() {
+        return originalCards;
+    }
+    
+    public static ArrayList<Card> getCards() {
+        return cards;
+    }
+    
+    public static void setCards(ArrayList<Card> cards) {
+        Board.cards = cards;
+    }
 }

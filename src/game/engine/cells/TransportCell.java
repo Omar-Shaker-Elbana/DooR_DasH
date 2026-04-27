@@ -1,11 +1,8 @@
 package game.engine.cells;
 
-<<<<<<< HEAD
 import game.engine.Constants;
 import game.engine.monsters.Monster;
 
-=======
->>>>>>> b39bd8a76dee9214f0ad5ed04b197624196b3cfc
 public abstract class TransportCell extends Cell {
 	private int effect;
 
@@ -17,7 +14,6 @@ public abstract class TransportCell extends Cell {
 	public int getEffect() {
 		return effect;
 	}
-<<<<<<< HEAD
 	public void transport(Monster monster) {
         int newPosition = monster.getPosition() + this.getEffect();
         
@@ -35,7 +31,5 @@ public abstract class TransportCell extends Cell {
         super.onLand(landingMonster, opponentMonster); 
         this.transport(landingMonster);
     }
-=======
->>>>>>> b39bd8a76dee9214f0ad5ed04b197624196b3cfc
 	
 }
