@@ -25,10 +25,18 @@ public class Board {
                 originalCards.add(c);
             }
         }
-
+        setCardsByRarity();
         reloadCards();
     }
-
+    private void setCardsByRarity() {
+        ArrayList<Card> expanded = new ArrayList<>();
+        for (Card c : originalCards) {
+            for (int i = 0; i < c.getRarity(); i++) {
+                expanded.add(c);
+            }
+        }
+        originalCards = expanded;
+    }
     private int[] indexToRowCol(int index) {
         int row = index / Constants.BOARD_COLS;
         int col = index % Constants.BOARD_COLS;

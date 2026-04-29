@@ -14,27 +14,22 @@ public class Schemer extends Monster {
 		target.alterEnergy(-diff);
 		return diff;
 	}
-	public void executePowerupEffect(Monster opponentMonster) {
-		int totalEnergy = 0;
-		ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
-		for(Monster stationed : stationedMonsters)
-		{
-			if(stationed != this)
-			{
-			totalEnergy+= this.stealEnergyFrom(stationed);
-			}
-			}
-		super.alterEnergy(totalEnergy);
-	}
-	public void setEnergy(int e) {
-        int diff = e - this.getEnergy();
-        if(diff != 0)
-        {
-        	super.setEnergy(e+10);
-        }
-        else
-        {
-        	super.setEnergy(e);
-        }
-    }
+	  public void executePowerupEffect(Monster opponentMonster) {
+	        int totalEnergy = 0;
+	        ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
+	        for(Monster stationed : stationedMonsters)
+	        {
+	            if(stationed != this && stationed != opponentMonster)
+	            {
+	            totalEnergy+= this.stealEnergyFrom(stationed);
+	            }
+	            
+	            }
+	        totalEnergy+=this.stealEnergyFrom(opponentMonster);
+	        this.alterEnergy(totalEnergy);
+	    }
+	    public void setEnergy(int e) {
+	        
+	           super.setEnergy(e+10);
+	    }
 }

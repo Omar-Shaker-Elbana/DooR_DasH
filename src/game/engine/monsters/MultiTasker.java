@@ -38,7 +38,7 @@ public class MultiTasker extends Monster {
 		int diff = e - this.getEnergy();
 		if(diff != 0)
 		{
-			super.setEnergy(e+this.getEnergy()+Constants.MULTITASKER_BONUS);
+			super.setEnergy(e+Constants.MULTITASKER_BONUS);
 		}
 		else
 		{
