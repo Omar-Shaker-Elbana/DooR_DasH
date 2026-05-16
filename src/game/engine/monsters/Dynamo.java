@@ -7,11 +7,14 @@ public class Dynamo extends Monster {
 	public Dynamo(String name, String description, Role role, int energy) {
 		super(name, description, role, energy);
 	}
+	
+	@Override
 	public void executePowerupEffect(Monster opponentMonster) {
-		opponentMonster.setFrozen(true);;
+		opponentMonster.setFrozen(true);
 	}
-	public void setEnergy(int e) {
-		int diff = e - this.getEnergy();
-		super.setEnergy(this.getEnergy()+diff*2);
-}
+	
+	@Override
+	public void setEnergy(int energy) {
+		super.setEnergy(getEnergy() + (energy - getEnergy()) * 2);
+	}
 }

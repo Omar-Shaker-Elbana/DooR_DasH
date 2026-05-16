@@ -33,40 +33,35 @@ public class DoorCell extends Cell implements CanisterModifier {
 		this.activated = isActivated;
 	}
 
-	
-	@Override
-	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-	    if (monster.getRole() == this.role) {
-	        monster.alterEnergy(canisterValue);
-	    } else {
-	        monster.alterEnergy(-canisterValue);
-	    }
-	}
-
-	
 	@Override
 	public void onLand(Monster landingMonster, Monster opponentMonster) {
-	    super.onLand(landingMonster, opponentMonster);
-	    if (this.activated) return;
+		super.onLand(landingMonster, opponentMonster);
+		
+		if(isActivated())
+			return; 
+		
+		System.out.println(landingMonster.getName() + " landed on " + role + " door!");
+		
+		boolean wasShielded = landingMonster.isShielded();
+	     
+		modifyCanisterEnergy(landingMonster, this.energy);
 
-	    boolean isGain = (landingMonster.getRole() == this.role);
+		if (wasShielded && landingMonster.getRole() != this.role) 
+			return;
 
-	    if (!isGain && landingMonster.isShielded()) {
-	        landingMonster.setShielded(false);
-	        return;
-	    }
+	    
+		for (Monster monster : Board.getStationedMonsters()) {
+			if (monster.getRole() == landingMonster.getRole()) {
+				modifyCanisterEnergy(monster, this.energy);
+				System.out.println("  -> " + monster.getName() + " got " + this.energy + " energy!");
+			}
+		}
+		
+		setActivated(true);
+	}
 
-	    // Apply to landing monster
-	    modifyCanisterEnergy(landingMonster, this.energy);
-
-	    // Apply to teammates — use landing monster's direction, NOT re-evaluate per monster
-	    int teamEffect = isGain ? this.energy : -this.energy;
-	    for (Monster m : Board.getStationedMonsters()) {
-	        if (m.getRole() == landingMonster.getRole()) {
-	            m.alterEnergy(teamEffect);
-	        }
-	    }
-
-	    this.activated = true;
+	@Override
+	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
+		monster.alterEnergy(this.role == monster.getRole() ? canisterValue : -canisterValue);
 	}
 }

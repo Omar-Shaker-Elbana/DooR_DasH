@@ -7,7 +7,7 @@ public abstract class Monster implements Comparable<Monster> {
 	private String name;
 	private String description;
 	private Role role;
-	private Role originalRole; // For confusion card
+	private Role originalRole; 
 	private int energy;
 	private int position;
 	private boolean frozen;
@@ -87,47 +87,38 @@ public abstract class Monster implements Comparable<Monster> {
 		this.confusionTurns = confusionTurns;
 	}
 
+	public abstract void executePowerupEffect(Monster opponentMonster);
+	
+	public boolean isConfused() {
+		return confusionTurns > 0;
+	}
+	
+	public void move(int distance) {
+		this.setPosition(this.getPosition() + distance);
+	}
+	
+	public final void alterEnergy(int energy) {
+		if (shielded && energy < 0) {
+			System.out.println(name + "'s shield blocked " + (-energy) + " damage!");
+			shielded = false; 
+		}
+		
+		else 
+			this.setEnergy(this.getEnergy() + energy);	
+	}
+	
+	public void decrementConfusion() {
+		if (isConfused()) {
+			this.setConfusionTurns(this.getConfusionTurns() - 1);
+			
+			if(!isConfused())
+				this.setRole(originalRole);
+		}
+	}
+
 	@Override
 	public int compareTo(Monster other) {
 		return this.position - other.position;
 	}
-	public abstract void executePowerupEffect(Monster opponentMonster);
-	public boolean isConfused()
-	{
-		if(this.getConfusionTurns() == 0)
-		{
-			return false;
-		}
-		return true;
-	}
-	public void move(int distance)
-	{
-		
-			setPosition(this.position+distance);
-		
-	}
-	public final void alterEnergy(int energy) {
-	    if (isShielded() && energy < 0) {
-	        setShielded(false);
-	        return;
-	    }
-	    setEnergy(this.getEnergy() + energy);
-	}
-	
-	public void decrementConfusion()
-	{	
-		
-		if(this.confusionTurns>0)
-		{
-			this.confusionTurns--;
-			if(this.confusionTurns == 0){
-				this.role=this.originalRole;
-			}
-		}
-			
-	}
-	
+
 }
-
-
-	

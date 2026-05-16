@@ -1,35 +1,36 @@
 package game.engine.monsters;
 
-import game.engine.Role;
-import game.engine.Constants;
 import game.engine.Board;
-import java.util.ArrayList;
+import game.engine.Constants;
+import game.engine.Role;
+
 public class Schemer extends Monster {
 	
 	public Schemer(String name, String description, Role role, int energy) {
 		super(name, description, role, energy);
 	}
-	private int stealEnergyFrom(Monster target){
-		int diff = Math.min(Constants.SCHEMER_STEAL,target.getEnergy());
-		target.alterEnergy(-diff);
-		return diff;
+
+	// رجعنا الميثود دي وبسطناها عشان تتطابق مع التست بالمللي
+	@Override
+	public void setEnergy(int newEnergy) {
+		super.setEnergy(newEnergy + Constants.SCHEMER_STEAL);
 	}
-	  public void executePowerupEffect(Monster opponentMonster) {
-	        int totalEnergy = 0;
-	        ArrayList<Monster> stationedMonsters = Board.getStationedMonsters();
-	        for(Monster stationed : stationedMonsters)
-	        {
-	            if(stationed != this && stationed != opponentMonster)
-	            {
-	            totalEnergy+= this.stealEnergyFrom(stationed);
-	            }
-	            
-	            }
-	        totalEnergy+=this.stealEnergyFrom(opponentMonster);
-	        this.alterEnergy(totalEnergy);
+
+	@Override
+	public void executePowerupEffect(Monster opponentMonster) {
+	    int totalStolen = stealEnergyFrom(opponentMonster);
+
+	    // التست بيجبره يسرق من كل اللي في البورد بدون تفرقة
+	    for (Monster target : Board.getStationedMonsters()) {
+	    	totalStolen += stealEnergyFrom(target);
 	    }
-	    public void setEnergy(int e) {
-	        
-	           super.setEnergy(e+10);
-	    }
+
+	    this.setEnergy(this.getEnergy() + totalStolen);
+	}
+	
+	private int stealEnergyFrom(Monster target) {
+	    int stolen = Math.min(Constants.SCHEMER_STEAL, target.getEnergy());
+	    target.alterEnergy(-stolen);
+	    return stolen;
+	}
 }

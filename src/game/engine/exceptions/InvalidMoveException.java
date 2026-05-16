@@ -5,15 +5,11 @@ public class InvalidMoveException extends GameActionException{
 	private static final String MSG = "Invalid move attempted";
 
 	public InvalidMoveException() {
-		super(getMsg());
+		super(MSG);
 	}
 
 	public InvalidMoveException(String message){
 		super(message);
-	}
-
-	public static String getMsg() {
-		return MSG;
 	}
 
 }
