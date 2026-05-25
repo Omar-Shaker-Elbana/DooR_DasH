@@ -10,7 +10,6 @@ public class Schemer extends Monster {
 		super(name, description, role, energy);
 	}
 
-	// رجعنا الميثود دي وبسطناها عشان تتطابق مع التست بالمللي
 	@Override
 	public void setEnergy(int newEnergy) {
 		super.setEnergy(newEnergy + Constants.SCHEMER_STEAL);
@@ -20,7 +19,6 @@ public class Schemer extends Monster {
 	public void executePowerupEffect(Monster opponentMonster) {
 	    int totalStolen = stealEnergyFrom(opponentMonster);
 
-	    // التست بيجبره يسرق من كل اللي في البورد بدون تفرقة
 	    for (Monster target : Board.getStationedMonsters()) {
 	    	totalStolen += stealEnergyFrom(target);
 	    }

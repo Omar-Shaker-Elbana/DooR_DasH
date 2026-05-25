@@ -137,7 +137,6 @@ public class Board {
 	        throw new InvalidMoveException("Cannot land on opponent!");
 	    }
 	    
-		// To make sure we dont decrement right after getting the confusion card action upon on land
 	
 	    if (currentMonster.isConfused() && currentMonster.getRole() == oldRole) {
 	        currentMonster.decrementConfusion();

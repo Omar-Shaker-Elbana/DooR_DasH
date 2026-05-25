@@ -27,7 +27,6 @@ public class MultiTasker extends Monster {
 	
 	@Override
 	public void setEnergy(int newEnergy) {
-		// بسطناها عشان التست بيدي البونص دايماً
 		super.setEnergy(newEnergy + Constants.MULTITASKER_BONUS);
 	}
 

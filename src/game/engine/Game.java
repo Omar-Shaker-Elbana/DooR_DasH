@@ -18,7 +18,6 @@ public class Game {
     private Monster current;
     private int lastRoll; 
     
-    // 1️⃣ الكونسطراكتور بتاع المايلستون (عشان الـ 22 تيست ينجحوا ويقفلوا أخضر)
     public Game(Role playerRole) throws IOException {
         this.board = new Board(DataLoader.readCards());
         this.allMonsters = DataLoader.readMonsters();
@@ -36,7 +35,6 @@ public class Game {
         board.initializeBoard(DataLoader.readCells());
     }
 
-    // 2️⃣ كونسطراكتور الـ GUI (مود لاعب ضد الكمبيوتر)
     public Game(Monster selectedMonster) throws IOException {
         this.board = new Board(DataLoader.readCards());
         this.allMonsters = DataLoader.readMonsters();
@@ -54,7 +52,6 @@ public class Game {
         board.initializeBoard(DataLoader.readCells());
     }
 
-    // 3️⃣ كونسطراكتور الـ GUI (مود 2 لاعبين)
     public Game(Monster player1, Monster player2) throws IOException {
         this.board = new Board(DataLoader.readCards());
         this.allMonsters = DataLoader.readMonsters();

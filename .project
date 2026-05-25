@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Door_Dash_Project</name>
+	<name>DoorDash</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1773652056052</id>
+			<id>1778932841447</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

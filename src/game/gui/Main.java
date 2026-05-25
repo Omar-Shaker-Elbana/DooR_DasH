@@ -10,6 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+    	SoundManager.preloadAllSounds();
         this.window = primaryStage;
         window.setTitle("DooR DasH: Scare vs Laugh Touchdown");
         
