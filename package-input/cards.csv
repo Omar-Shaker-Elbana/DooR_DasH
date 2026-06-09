@@ -1,0 +1,8 @@
+SWAPPER,Position Swap,Swap places with opponent if behind,4
+SHIELD,Super Shield,Block next negative effect,5
+ENERGYSTEAL,Small Snatcher,Steal 50 energy from opponent,3,50
+ENERGYSTEAL,Sneaky Thief,Steal 100 energy from opponent,2,100
+STARTOVER,Contamination Code,Player return to first cell,2,false
+STARTOVER,2319 Alert,Opponent returns to first cell,3,true
+CONFUSION,Mind Scramble,Both players confused for 2 turns,3,2
+CONFUSION,Total Confusion,Both players confused for 3 turns,2,3
