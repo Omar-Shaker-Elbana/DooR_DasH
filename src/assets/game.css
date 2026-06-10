@@ -1,0 +1,239 @@
+/* ═══════════════════════════════════════════════════════════════════
+   game.css  —  DooR DasH  |  JavaFX global stylesheet
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Root ──────────────────────────────────────────────────────── */
+.root {
+    -fx-font-family: "Segoe UI", "Verdana", sans-serif;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 75%,
+        #1f2833, #050608);
+}
+
+/* ─── Panel cards ───────────────────────────────────────────────── */
+.panel-card {
+    -fx-background-color: rgba(22, 33, 62, 0.93);
+    -fx-border-color: #45a29e;
+    -fx-border-width: 3;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+.panel-p1 {
+    -fx-background-color: rgba(22, 33, 62, 0.93);
+    -fx-border-color: #00b894;
+    -fx-border-width: 3;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+.panel-p2 {
+    -fx-background-color: rgba(22, 33, 62, 0.93);
+    -fx-border-color: #e84393;
+    -fx-border-width: 3;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn-base {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-padding: 10 22;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-p1            { -fx-background-color: #00b894; -fx-text-fill: white; }
+.btn-p2            { -fx-background-color: #e84393; -fx-text-fill: white; }
+.btn-power         { -fx-background-color: #f1c40f; -fx-text-fill: #1a1a2e; }
+.btn-danger        { -fx-background-color: #e74c3c; -fx-text-fill: white; }
+.btn-accent        { -fx-background-color: #66fcf1; -fx-text-fill: #0b0c10; }
+
+.btn-p1:disabled,
+.btn-p2:disabled,
+.btn-power:disabled {
+    -fx-background-color: #2a2a3a;
+    -fx-text-fill: #44445a;
+    -fx-cursor: default;
+}
+
+/* ─── Labels ────────────────────────────────────────────────────── */
+.label-hero {
+    -fx-font-size: 52px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #66fcf1;
+}
+.label-section {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.label-energy {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #66fcf1;
+}
+.label-pos  { -fx-font-size: 13px; -fx-text-fill: #c5c6c7; }
+.label-desc { -fx-font-size: 13px; -fx-text-fill: #bdc3c7; }
+.label-muted { -fx-text-fill: rgba(255,255,255,0.35); -fx-font-size: 11px; }
+
+/* ─── Status badges ─────────────────────────────────────────────── */
+.badge {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 9;
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+}
+.badge-frozen   { -fx-background-color: #00cec9; }
+.badge-shielded { -fx-background-color: #3498db; }
+.badge-confused { -fx-background-color: #9b59b6; }
+.badge-lead     { -fx-background-color: #f1c40f; -fx-text-fill: #1a1a2e; }
+
+/* ─── Energy progress bar ───────────────────────────────────────── */
+.energy-bar {
+    -fx-pref-height: 14;
+    -fx-background-radius: 6;
+}
+.energy-bar .bar   { -fx-background-radius: 6; }
+.energy-bar .track {
+    -fx-background-color: #111122;
+    -fx-background-radius: 6;
+}
+.energy-bar-scarer .bar  { -fx-background-color: linear-gradient(to right, #c0392b, #e74c3c); }
+.energy-bar-laugher .bar { -fx-background-color: linear-gradient(to right, #d4ac0d, #f1c40f); }
+
+/* ─── Board cells ───────────────────────────────────────────────── */
+.cell {
+    -fx-background-radius: 0;
+}
+.cell-dark  { -fx-background-color: rgba(31, 40, 51, 0.62); }
+.cell-light { -fx-background-color: rgba(11, 12, 16, 0.62); }
+
+.cell-door-scarer  { -fx-background-color: rgba(232, 67, 147, 0.13); }
+.cell-door-laugher { -fx-background-color: rgba(0, 184, 148, 0.13); }
+.cell-card         { -fx-background-color: rgba(102, 252, 241, 0.11); }
+.cell-conveyor     { -fx-background-color: rgba(241, 196, 15, 0.11); }
+.cell-sock         { -fx-background-color: rgba(231, 76, 60, 0.15); }
+.cell-monster-cell { -fx-background-color: rgba(155, 89, 182, 0.13); }
+.cell-start        { -fx-background-color: rgba(46, 204, 113, 0.19); }
+.cell-finish       { -fx-background-color: rgba(241, 196, 15, 0.23); }
+
+/* ─── Turn banner ───────────────────────────────────────────────── */
+.turn-banner {
+    -fx-background-color: rgba(15, 20, 35, 0.96);
+    -fx-border-color: transparent transparent #2a3a4a transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 8 24;
+}
+.turn-label-p1 {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00b894;
+}
+.turn-label-p2 {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e84393;
+}
+
+/* ─── Console / log ─────────────────────────────────────────────── */
+.console-area {
+    -fx-background-color: rgba(5, 5, 10, 0.95);
+    -fx-padding: 8 10;
+}
+.console-scroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.console-scroll .scroll-bar:vertical {
+    -fx-pref-width: 7;
+    -fx-background-color: #08090d;
+}
+.console-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #45a29e;
+    -fx-background-radius: 3;
+}
+.console-scroll .scroll-bar:vertical .increment-button,
+.console-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0;
+}
+
+/* ─── ComboBox / monster picker ─────────────────────────────────── */
+.monster-picker {
+    -fx-background-color: #0f3460;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.monster-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+.monster-picker .arrow {
+    -fx-background-color: #66fcf1;
+}
+.monster-picker .list-cell {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-color: #0f3460;
+    -fx-padding: 6 12;
+}
+.monster-picker .list-cell:filled:hover {
+    -fx-background-color: #1a4a80;
+}
+.monster-picker .list-cell:filled:selected {
+    -fx-background-color: #45a29e;
+}
+
+/* ─── Separator ─────────────────────────────────────────────────── */
+.separator .line {
+    -fx-border-color: #2a3a4a;
+    -fx-border-width: 1;
+}
+
+/* ─── Tooltip ───────────────────────────────────────────────────── */
+.tooltip {
+    -fx-background-color: #111122;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-border-color: #45a29e;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+}
+
+/* ─── Race track ────────────────────────────────────────────────── */
+.race-track {
+    -fx-background-color: #0d1117;
+    -fx-border-color: #2a3a4a;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* ─── Pause / overlay dialogs ───────────────────────────────────── */
+.dialog-box {
+    -fx-background-color: rgba(14, 16, 28, 0.97);
+    -fx-border-color: #66fcf1;
+    -fx-border-width: 2;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-padding: 32 40;
+}
+
+/* ─── How to play dossier ───────────────────────────────────────── */
+.dossier-box {
+    -fx-background-color: #111a2e;
+    -fx-border-color: #f1c40f;
+    -fx-border-width: 3;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+}
+.rule-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #66fcf1;
+}
+.rule-desc {
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(255,255,255,0.88);
+}
