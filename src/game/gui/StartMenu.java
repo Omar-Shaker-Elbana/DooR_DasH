@@ -90,7 +90,7 @@ public class StartMenu {
 
     private void playBackgroundMusic() {
         try {
-            File bgmFile = new File("src/assets/sounds/menu_bgm.mp3");
+        	File bgmFile = new File("assets/sounds/menu_bgm.mp3");
             if (bgmFile.exists()) {
                 Media media = new Media(bgmFile.toURI().toString());
                 bgmPlayer = new MediaPlayer(media);
@@ -441,19 +441,19 @@ public class StartMenu {
         uiContainer.getChildren().add(bg);
         
         ImageView p1Img = new ImageView();
-        try { p1Img.setImage(new Image("file:src/assets/" + player1Monster.getName() + ".png")); } catch(Exception e){}
+        try { p1Img.setImage(new Image("file:assets/" + player1Monster.getName() + ".png")); } catch(Exception e){}
         p1Img.setFitWidth(400); p1Img.setFitHeight(400); p1Img.setPreserveRatio(true);
         p1Img.setStyle("-fx-effect: dropshadow(three-pass-box, #00b894, 30, 0.5, 0, 0);"); 
         
         ImageView p2Img = new ImageView();
         if (isVsComputer) {
             Monster mystery = availableMonsters.get(new Random().nextInt(availableMonsters.size()));
-            try { p2Img.setImage(new Image("file:src/assets/" + mystery.getName() + ".png")); } catch(Exception e){}
+            try { p2Img.setImage(new Image("file:assets/" + mystery.getName() + ".png")); } catch(Exception e){}
             ColorAdjust blackout = new ColorAdjust();
             blackout.setBrightness(-1.0); 
             p2Img.setEffect(blackout);
         } else {
-            try { p2Img.setImage(new Image("file:src/assets/" + player2Monster.getName() + ".png")); } catch(Exception e){}
+        	try { p2Img.setImage(new Image("file:assets/" + player2Monster.getName() + ".png")); } catch(Exception e){}
             p2Img.setStyle("-fx-effect: dropshadow(three-pass-box, #e84393, 30, 0.5, 0, 0);"); 
         }
         
@@ -636,7 +636,7 @@ public class StartMenu {
                 }
 
                 try {
-                    String imagePath = "file:src/assets/" + selected.getName() + ".png";
+                	String imagePath = "assets/" + selected.getName() + ".png";
                     imageView.setImage(new Image(imagePath));
                     
                     ScaleTransition bump = new ScaleTransition(Duration.millis(300), imageView);
